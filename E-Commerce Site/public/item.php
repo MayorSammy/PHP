@@ -41,7 +41,7 @@ $query = query("SELECT * FROM products WHERE product_id = ". escape_string($_GET
          
 
     <div class="caption-full">
-        <h4><a href="#"><?php echo$row['product_title'];?></a> </h4>
+        <h4><a href="#"><?php echo $row['product_title'];?></a> </h4>
         <hr>
         <h4 class=""><?php echo "$".$row['product_price'];?></h4>
 

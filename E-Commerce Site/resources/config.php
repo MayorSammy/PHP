@@ -11,6 +11,8 @@ defined("TEMPLATE_FRONT") ? null : define("TEMPLATE_FRONT", __DIR__.DS."template
 
 defined("TEMPLATE_BACK") ? null : define("TEMPLATE_BACK", __DIR__.DS."templates".DS."back");
 
+defined("IMAGES") ? null : define("IMAGES", __DIR__.DS."images");
+
 
 
 defined("DB_HOST") ? null : define("DB_HOST", "localhost");

@@ -23,9 +23,15 @@
         <!-- /.row -->
 
         <!-- Page Features -->
-        <div class="row text-center">
+            <div class="row text-center">
+            
+            <?php 
+            
+            get_category_products();
+                
+            
+            ?>
 
-            <?php get_cat_products(); ?>
 
             
 

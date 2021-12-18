@@ -78,19 +78,63 @@ function get_categories(){
 }
 
 
+function get_category_products(){
+	$query = query("SELECT * FROM products WHERE product_category_id = ". escape_string($_GET['id']));
+	confirm($query);
+
+	while ($row = fetch_array($query)) {
+		$category_products = <<<MARKER
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src= {$row['product_image']} alt="">
+                    <div class="caption">
+                        <h3>Feature {$row['product_title']}</h3>
+                        <p>{$row['short_desc']}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            MARKER;
+
+            echo($category_products);
+        }
+    }
 
 
+/////////////////////////
 
+function get_shop_products(){
+	$query = query("SELECT * FROM products");
+	confirm($query);
 
+	while ($row = fetch_array($query)) {
+		$all_products = <<<MARKER
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src= {$row['product_image']} alt="">
+                    <div class="caption">
+                        <h3>Feature {$row['product_title']}</h3>
+                        <p>{$row['short_desc']}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
+            MARKER;
+
+            echo($all_products);
+        }
+    }
+
+    
 
 
 //BACK END FUNCTIONS
-
-
-
-
-
 
 
 ?>
