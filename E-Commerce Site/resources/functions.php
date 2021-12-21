@@ -4,8 +4,29 @@
 
 function redirect($location){
 
-	header("Location: $location");
+	header("Location: {$location}");
 }
+
+function set_message($message){
+    if(!empty($message)){
+        $_SESSION['message'] = $message;
+    }
+    else{
+        $message = "";
+    }
+
+
+}
+
+function display_message(){
+    $message = $_SESSION['message'];
+    if (isset($message)) {
+        echo $message;
+        unset($_SESSION["message"]);
+    }
+
+}
+
 
 function query($sql){
 	global $connection;
@@ -130,6 +151,57 @@ function get_shop_products(){
             echo($all_products);
         }
     }
+
+
+function login_user(){
+    if (isset($_POST['submit'])) {
+
+
+        $username = escape_string($_POST['username']);
+        $password = escape_string($_POST['password']);
+
+        $query = query("SELECT * FROM users WHERE username = {$username} AND password = {$password}");
+        confirm($query);
+
+        if(mysqli_num_rows($query)==0){
+            set_message("Your Password or Username is incorrect");
+            redirect("login.php");
+        }
+        else{
+            redirect("admin");
+        }
+    }
+}
+
+
+function send_message(){
+
+    if (isset($_POST["submit"])) {
+
+        $receiver = "samuelebong20@gmail.com";
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+        $subject = $_POST["subject"];
+        $message = $_POST["message"];
+
+
+        $header = "FROM: {$name} ({$email})";
+
+        $sent = mail($receiver, $subject , $message, $header);
+
+        if (!$sent) {
+            set_message("We experienced an issue while trying to send your email");
+            redirect("contact.php");
+        }
+        else{
+            set_message("Message successfully sent");
+            redirect("contact.php");
+        }
+    }
+
+    
+}
 
     
 
